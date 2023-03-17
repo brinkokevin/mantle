@@ -10,7 +10,7 @@ use crate::{
 };
 
 use self::models::{
-    CreateNotificationResponse, GetSocialLinkResponse, ListSocialLinksResponse, SocialLinkType,
+    CreateNotificationResponse, ListNotificationResponse, ListNotificationsResponse,
 };
 
 impl RobloxApi {
