@@ -6,7 +6,7 @@ use crate::models::AssetId;
 #[derive(Deserialize, Clone)]
 #[serde(rename_all = "PascalCase")]
 pub struct CreateNotificationResponse {
-    pub id: AssetId,
+    pub id: String,
 }
 
 #[derive(Deserialize, Clone)]
@@ -20,7 +20,7 @@ pub struct ListNotificationsResponse {
 #[derive(Deserialize, Clone)]
 #[serde(rename_all = "camelCase")]
 pub struct ListNotificationResponse {
-    pub id: AssetId,
+    pub id: String,
 	pub name: String,
 	pub content: String,
 }
