@@ -16,7 +16,6 @@ use rbx_api::{
     badges::models::CreateBadgeResponse,
     developer_products::models::{
         CreateDeveloperProductIconResponse, CreateDeveloperProductResponse,
-        GetDeveloperProductResponse,
     },
     experiences::models::{CreateExperienceResponse, ExperienceConfigurationModel},
     game_passes::models::{CreateGamePassResponse, GetGamePassResponse},
@@ -584,7 +583,10 @@ impl ResourceManager<RobloxInputs, RobloxOutputs> for RobloxResourceManager {
             RobloxInputs::Product(inputs) => {
                 let experience = single_output!(dependency_outputs, RobloxOutputs::Experience);
 
-                let CreateDeveloperProductResponse { id } = self
+                let CreateDeveloperProductResponse {
+                    product_id,
+                    developer_product_id,
+                } = self
                     .roblox_api
                     .create_developer_product(
                         experience.asset_id,
@@ -594,12 +596,9 @@ impl ResourceManager<RobloxInputs, RobloxOutputs> for RobloxResourceManager {
                     )
                     .await?;
 
-                let GetDeveloperProductResponse { id: product_id } =
-                    self.roblox_api.get_developer_product(id).await?;
-
                 Ok(RobloxOutputs::Product(ProductOutputs {
                     asset_id: product_id,
-                    product_id: id,
+                    product_id: developer_product_id,
                 }))
             }
             RobloxInputs::Pass(inputs) => {
